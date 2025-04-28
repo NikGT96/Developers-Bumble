@@ -27,7 +27,7 @@ const Connections = () => {
 
   return (
     <div>
-      {userConnections.map((connection) => (
+      {userConnections?.map((connection) => (
         <UserCard user={connection} />
       ))}
     </div>
