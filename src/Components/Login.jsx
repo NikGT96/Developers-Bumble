@@ -21,7 +21,7 @@ const Login = () => {
     if (user) {
       navigate("/");
     }
-  });
+  },[]);
 
   const registerUser = async() => {
     try {

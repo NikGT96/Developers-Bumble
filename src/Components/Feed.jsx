@@ -12,7 +12,7 @@ const Feed = () => {
 
   useEffect(() => {
     getFeed();
-  }, []);
+  }, [user]);
 
   const feed = useSelector((store) => store.feed);
 
@@ -35,8 +35,8 @@ const Feed = () => {
   return (
     feed && (
       <div>
-        {feed.map((feed) => (
-          <UserCard user={feed} />
+        {feed?.map((feed) => (
+           <UserCard key={feed._id} user={feed} />
         ))}
       </div>
     )
