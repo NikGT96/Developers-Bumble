@@ -8,6 +8,7 @@ import { RouterProvider } from "react-router";
 import Feed from "./Components/Feed.jsx";
 import store from "./Utils/store.jsx";
 import { Provider } from "react-redux";
+import Profile from "./Components/Profile.jsx";
 
 const appRouter = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const appRouter = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/profile",
+        element: <Profile />,
+      }
     ],
   },
 ]);
