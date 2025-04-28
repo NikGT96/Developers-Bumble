@@ -1,9 +1,28 @@
+import axios from "axios";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {removeRequest} from "../Utils/requestsSlice"
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, isRequest, setIsRequest, id }) => {
+  const { firstName, lastName, photoUrl, age, gender, about } = user;
+  const dispatch = useDispatch();
 
-    const {firstName, lastName, photoUrl, age, gender, about} = user;  
-    if (!user) return;
+
+  const reviewRequest = async (status) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:7777/request/review/"+ status + "/" + id,
+        {},
+        { withCredentials: true }
+      );
+      dispatch(removeRequest(id));
+      console.log(res);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  if (!user) return;
 
   return (
     <div className="">
@@ -21,10 +40,27 @@ const UserCard = ({ user }) => {
             <p>{gender}</p>
             <p>{about}</p>
             <div className="card-actions justify-center">
-              <div className="badge badge-outline p-6 bg-red-500">Reject</div>
-              <div className="badge badge-outline p-6 bg-green-400">
-                Interested
-              </div>
+              {isRequest ? (
+                <div
+                  onClick={() => reviewRequest("rejected")}
+                  className="cursor-pointer badge badge-outline p-6 bg-red-500"
+                >
+                  Decline
+                </div>
+              ) : (
+                <div className="badge badge-outline p-6 bg-red-500">
+                  Not Interested
+                </div>
+              )}
+              {isRequest ? (
+                <div onClick={() => reviewRequest("accepted")} className="badge badge-outline p-6 bg-green-400">
+                  Accept
+                </div>
+              ) : (
+                <div className="badge badge-outline p-6 bg-green-400">
+                  Interested
+                </div>
+              )}
             </div>
           </div>
         </div>

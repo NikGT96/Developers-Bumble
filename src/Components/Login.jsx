@@ -8,7 +8,7 @@ const Login = () => {
   const user = useSelector((store) => store.user);
   const location = useLocation();
   const isSignUp = location.state?.isSignUp;
-  console.log(isSignUp);
+  // console.log(isSignUp);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
